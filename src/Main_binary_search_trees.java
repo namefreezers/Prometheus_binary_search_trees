@@ -86,11 +86,26 @@ class Leaf {
 		return res;
 	}
 
+	ArrayList<Integer> inorderTreeWalkMod() {
+		ArrayList<Integer> res = new ArrayList<Integer>();
+		inorderTreeWalkUtilMod(res, this);
+		return res;
+	}
+
 	void inorderTreeWalkUtil(List<Integer> list, Leaf m) {
 		if (m != null) {
 			inorderTreeWalkUtil(list, m.left);
 			list.add(m.value);
 			inorderTreeWalkUtil(list, m.right);
+		}
+	}
+
+	void inorderTreeWalkUtilMod(List<Integer> list, Leaf m) {
+		if (m != null) {
+			inorderTreeWalkUtilMod(list, m.left);
+			if (m.left == null && m.right == null)
+				list.add(m.value);
+			inorderTreeWalkUtilMod(list, m.right);
 		}
 	}
 }
@@ -110,11 +125,11 @@ public class Main_binary_search_trees {
 
 	public static void main(String[] args) {
 
-		Leaf leaf = Leaf.createFromFile("data_examples_07/input_10a.txt");
+		Leaf leaf = Leaf.createFromFile("data_examples_07/input_1000a.txt");
 		System.out.println(leaf.inorderTreeWalk());
 		leaf.fixTree();
+		System.out.println(leaf.value);
 		System.out.println(leaf.inorderTreeWalk());
-		
 
 	}
 }
