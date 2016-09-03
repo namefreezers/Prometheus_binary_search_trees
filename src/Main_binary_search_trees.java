@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -107,6 +108,52 @@ class Leaf {
 				list.add(m.value);
 			inorderTreeWalkUtilMod(list, m.right);
 		}
+	}
+
+	class Integ {
+		int i;
+
+		Integ(int i) {
+			this.i = i;
+		}
+	}
+
+	LinkedList<Integer> inorderTreeWalkWays(int searched) {
+		LinkedList<Integer> list = new LinkedList<Integer>();
+		inorderTreeWalkUtilWays(list, this, searched);
+		return list;
+	}
+
+	int inorderTreeWalkUtilWays(LinkedList<Integer> list, Leaf m, int searched) {
+		if (m != null) {
+			list.add(m.value);
+			int i = evaluate(searched, list);
+			if(i!= -1){
+				return i;
+			}
+			i = inorderTreeWalkUtilWays(list, m.left, searched);
+			if (i!=-1)
+				return i;
+			i = inorderTreeWalkUtilWays(list, m.right, searched);
+			if (i!=-1)
+				return i;
+			list.removeLast();
+			return -1;
+		}
+		return -1;
+	}
+
+	static int evaluate(int searched, LinkedList<Integer> list) {
+		int sum = 0;
+		int i = list.size() - 1;
+		while (sum < searched && i >= 0) {
+			sum += list.get(i);
+			i--;
+		}
+		if (sum == searched)
+			return list.size() - i - 1;
+		else
+			return -1;
 	}
 }
 
