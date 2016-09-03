@@ -175,6 +175,6 @@ public class Main_binary_search_trees {
 
 		Leaf leaf = Leaf.createFromFile("data_examples_07/input_1000a.txt");
 		leaf.fixTree();
-		System.out.println(leaf.inorderTreeWalkWays(1059));
+		System.out.println(leaf.inorderTreeWalkWays(1940));
 	}
 }
